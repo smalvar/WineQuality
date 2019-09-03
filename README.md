@@ -29,3 +29,54 @@ O presente problema se refere aos dados de vinhos portugueses "Vinho Verde", que
 
 
 ## a. Como foi a definição da sua estratégia de modelagem?
+
+O trabalho é efetuado considerando 4 etapas principais: 
+1. Limpeza de dados;
+2. Análise exploratória;
+3. Modelagem;
+4. Comparação.
+
+Dentro dessas etapas, algumas subrotinas são extremamente importantes:
+1. Limpeza de dados:
+   - Identificação de outliers;
+   - Utilização do método Z-score para remoção dos outliers;
+   - Binarização do atributo "type": variável dummy.
+2. Análise exploratória:
+   - Criação de outra coluna como categoria da avaliação: bom, regular e ruim;
+   - Análise de correlação;
+   - Análise em pairplot das principais variáveis;
+   - Análise em violin plot das principais variáveis em relação à qualidade.
+3. Modelagem:
+   - Separar 20% dos dados para serem usados como dados de validação e 80% para treino;
+   - Aplicar normalizador StandardScaler;
+   - Testar técnicas de regressão que considero mais adequadas:
+     - DecisionTreeRegressor
+     - KNeighborsRegressor
+     - RandomForestRegressor
+     - DecisionTreeRegressor
+4. Comparação:
+   - Comparação da acurácia de teste e treinamento de cada modelo;
+   - Cálculo do F1-score 'ponderado'.
+
+## b. Como foi definida a função de custo utilizada?
+
+Utilizei a função de custo entropia, comumente usada em classes, uma vez que a Gini normalmente deve ser usada em atributos contínuos. Isso é uma informação importante, pois como essa opção é mais custosa computacionalmente (pois utiliza transformação logarítmica), é comum que o índice Gini seja usado de foma inadequada em todas as aplicações. Caso as classes fossem muito desbalanceadas, teríamos que utilizar outra metodologia. Mais informações podem ser encontradas no trabalho de Elena Raileanu e Kilian Stoffel, *Theoretical comparison between the Gini Index andInformation Gain criteria* (https://www.unine.ch/files/live/sites/imi/files/shared/documents/papers/Gini_index_fulltext.pdf).
+
+## c. Qual foi o critério utilizado na seleção do modelo final?
+
+Ao contrário das classificações binárias, as quais funções de erro comum ou matriz confusão simples são usadas, no caso de um problema de várias classes, temos de utilizar outras métricas. Neste caso, escolhi utilizar as acurácias nos dados de teste e também o F1-score ponderado (não confundir com o F1-score e problemas com target binário).
+
+## d. Qual foi o critério utilizado para validação do modelo? Por que escolheu utilizar este método?
+
+Utilizei dois critérios: validação cruzada e RMSE.
+
+- RMSE: Essa é uma excelente métrica para modelos de regressão, além de ser muito fácil de interpretar. A Raiz Quadrada do Erro Quadrático Médio — ou simplesmente RMSE em inglês — nada mais é que a diferença entre o valor que foi previsto pelo seu modelo e o valor real que foi observado.
+- Validação cruzada: Cross-Validation — ou Validação Cruzada — é uma técnica que visa entender como seu modelo generaliza, ou seja, como ele se comporta quando vai prever um dado que nunca viu. Então criamos diferentes conjuntos de treino e teste e treinamos o modelo e ter certeza de que ele está performando bem. Nesse caso, ao invés de usarmos apenas um conjunto de teste para validar nosso modelo, utilizaremos N outros a partir dos mesmos dados. Utilizei o método K-Fold.
+
+A junção desses dois nos permite obter o melhor conjunto de validação paa um problema de regressão multivariável.
+
+## e. Quais evidências você possui de que seu modelo é suficientemente bom?
+
+Realizei um teste com um conjunto de testes e os valores previstos foram idênticos aos valores target. Pelas métricas apresentadas, observa-se que na maior parte dos casos, o modelo irá acerca todas as entradas. Em alguns casos, poderá errar a classificação de 1 ou 2 vinhos em todo o connjunto. 
+
+É importante ressaltar que esses testes foram feitos anteriormente com o conjunto de dados sujo, ou seja, com os outliers. O melhor resultado obtido nesse caso havia sido uma acurácia de 60%. Isso ressalta a importância de uma correta limpeza dos dados.
