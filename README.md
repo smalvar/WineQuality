@@ -80,3 +80,6 @@ A junção desses dois nos permite obter o melhor conjunto de validação paa um
 Realizei um teste com um conjunto de testes e os valores previstos foram idênticos aos valores target. Pelas métricas apresentadas, observa-se que na maior parte dos casos, o modelo irá acerca todas as entradas. Em alguns casos, poderá errar a classificação de 1 ou 2 vinhos em todo o connjunto. 
 
 É importante ressaltar que esses testes foram feitos anteriormente com o conjunto de dados sujo, ou seja, com os outliers. O melhor resultado obtido nesse caso havia sido uma acurácia de 60%. Isso ressalta a importância de uma correta limpeza dos dados.
+
+
+**ATENÇÃO**: Visando mostra como a correta escolha das funções de custo, limpeza de dados e escalonamento são importantes, também fiz o upload de um arquivo em que essas etapas não foram realizadas (Wine (sem wrangling - sem escalonamento).ipynb).
