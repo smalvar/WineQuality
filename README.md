@@ -1,6 +1,4 @@
 # WineQuality
-Resolução do desafio da Cognitivo.ai
-
 
 O presente problema se refere aos dados de vinhos portugueses "Vinho Verde", que possuem variantes de vinho branco e tinto. Devido a questões de privacidade, apenas variáveis físico-químicas (input) e sensoriais (output) estão disponíveis. As variáveis presentes são:
 
